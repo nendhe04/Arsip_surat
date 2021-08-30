@@ -32,6 +32,7 @@
                           <option value="Pemberitahuan">Pemberitahuan</option>
                     </select> </td>
 				</tr>
+				<form method="post" enctype="multipart/form-data" action = "<?php echo base_url(); ?>surat/proses_tambah">
 				<tr>
 					<td>Judul</td>
 					<td><input type="text" name="judul" value="<?php echo set_value('judul'); ?>"></td>
@@ -41,7 +42,6 @@
 					<td><input type="date" name="waktu" value="<?php echo set_value('waktu'); ?>"></td>
 				</tr>
 				<tr>
-					<form method="post" enctype="multipart/form-data" action = "<?php echo base_url(); ?>index.php/upload/proses">
 					<label><td>File </label></td>
                          <td><input type="file" class="form-control" id="file" name="file"></td>
                      </label>

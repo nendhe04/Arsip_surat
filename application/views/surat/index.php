@@ -17,6 +17,7 @@
 		<input type="text" name="keyword" placeholder="search">
 		<input type="submit" name="search_submit" value="Cari">
 	<?php echo form_close() ?>
+    
 	<br>
 		<table border="1" cellpadding="7">
 			<tr>
@@ -42,9 +43,9 @@
                             <td>
 
                                 <a href="<?= base_url('Surat/hapus?nomor_surat=' . $row->nomor_surat) ?>"
-                                    onclick="return confirm('Apakah Anda yakin ingin menghapus arsip surat ini ?')"
-                                    ><input type="button" class="btn btn-danger" value="Hapus"></a>
-                                <a href="<?= base_url('Surat/downloadSurat?id=' . $row->nomor_surat) ?>"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus arsip surat ini ?')">
+                                    <input type="button" class="btn btn-danger" value="Hapus"></a>
+                                <a href="<?= base_url('surat/download?id=' . $row->nomor_surat) ?>"
                                  ><input type="button" class="btn-warning" value="Unduh"></a>
                                 <a href="<?= base_url('Surat/detail?id=' . $row->nomor_surat) ?>"
                                  ><input type="button" class="btn-primary" value="Lihat>>"></a>

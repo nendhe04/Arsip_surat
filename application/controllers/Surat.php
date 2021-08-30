@@ -5,7 +5,7 @@ class Surat extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		
-		$this->load->model('SuratModel'); // Load SiswaModel ke controller ini
+		$this->load->model('SuratModel'); // Load SuratModel ke controller ini
 	}
 	
 	public function index(){
@@ -35,20 +35,13 @@ class Surat extends CI_Controller {
 	public function tambah(){
 		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
 			if($this->SuratModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
-				$this->SuratModel->save(); // Panggil fungsi save() yang ada di SiswaModel.php
+				$this->SuratModel->save(); // Panggil fungsi save() yang ada di SuratModel.php
 				redirect('surat');
 			}
 		}
 		$this->load->view('surat/sidebar');
 		$this->load->view('surat/form_tambah');
 	}
-	// public function tambah()
- //  //   {
- //  //       $data['title'] = ' Tambah Arsip | Desa XYZ';
- //  //       $this->load->view('surat/sidebar');
-	// 	// $this->load->view('surat/form_tambah',$data);
-       
- //  //   }
 	public function proses_tambah()
     {
         if ($this->input->post('finish')) {
@@ -72,7 +65,7 @@ class Surat extends CI_Controller {
                     'nomor_surat'      => $no_surat,
                     'kategori'          => $kategori,
                     'judul'            => $judul,
-                    'file' => $file,
+                    'file'             =>$file,
                 );
                 $this->SuratModel->tambah_pengajuan($dataPengajuan);
                 redirect('Surat/index');
@@ -80,7 +73,7 @@ class Surat extends CI_Controller {
             }
         }
     }
-	public function downloadSurat($nomor_surat)
+	public function download()
     {
         $pth = file_get_contents(base_url()."assets/surat/".$nomor_surat);
         force_download($nomor_surat, $pth);
@@ -90,4 +83,17 @@ class Surat extends CI_Controller {
         $this->SuratModel->hapus_surat($nomor_surat);
         redirect('Surat/index');
 	}
+
+   public function ubah_surat($nomor_surat){
+		if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+			if($this->SuratModel->validation("update")){ // Jika validasi sukses atau hasil validasi adalah TRUE
+				$this->SuratModel->edit($nomor_surat); // Panggil fungsi edit() yang ada di SiswaModel.php
+				redirect('surat');
+			}
+		}
+		
+		$data['surat'] = $this->SuratModel->view_by($nomor_surat);
+		$this->load->view('surat/form_ubah', $data);
+	}
+
 }
